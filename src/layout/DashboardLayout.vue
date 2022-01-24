@@ -30,6 +30,10 @@
         <i class="nc-icon nc-bell-55"></i>
         <p>Notifications</p>
       </sidebar-link>
+      <sidebar-link to="/admin/cadastro-escolas">
+        <i class="nc-icon nc-notes"></i>
+        <p>Cadastro Escolas</p>
+      </sidebar-link>
 
       <template slot="bottom-links">
         <sidebar-link class="active"

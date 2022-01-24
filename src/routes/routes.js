@@ -12,6 +12,8 @@ import Maps from 'src/pages/Maps.vue'
 import Notifications from 'src/pages/Notifications.vue'
 import Upgrade from 'src/pages/Upgrade.vue'
 
+import CadastroEscolas from '../components/CadastroEscolas/CadastroEscolas.vue';
+
 const routes = [
   {
     path: '/',
@@ -59,10 +61,16 @@ const routes = [
         component: Notifications
       },
       {
+        path: 'cadastro-escolas',
+        name: 'Cadastro Escolas',
+        component: CadastroEscolas
+      },
+      {
         path: 'upgrade',
         name: 'Upgrade to PRO',
         component: Upgrade
-      }
+      },
+      
     ]
   },
   { path: '*', component: NotFound }
