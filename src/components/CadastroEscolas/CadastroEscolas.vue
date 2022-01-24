@@ -5,6 +5,8 @@
         <h3 class="card-title mb-3 mt-2">Cadastrar Escola</h3>
 
         <form @submit.prevent="cadastrarEscola">
+          <div v-if="erros.mensagem" className="text-muted text-danger">{erros.mensagem}</div>
+
           <div class="row">
             <div class="col-md form-group">
               <label for="nomeEscola">Nome da Escola</label>
@@ -140,6 +142,9 @@ export default {
       localizacao: "",
       turnos: [],
 
+      //erros encontrados nas validações
+      erros: [],
+
       tabela: {
         colunas: ["Nome da Escola", "Nome do Diretor", "Localizacao", "Turnos"],
         dados: [
@@ -201,23 +206,35 @@ export default {
       return turnos;
     },
     cadastrarEscola() {
+      if (
+        this.nome == "" ||
+        this.localizacao == "" ||
+        this.turnos.length == 0
+      ) {
+        this.erros.push({
+          mensagem:
+            "Todos os campos (com exceção do nome do diretor) devem ser preenchidos",
+        });
+        console.log(this.erros);
+      } else {
+        let qtde_itens = this.tabela.dados.length + 1;
 
-      let qtde_itens = this.tabela.dados.length + 1;
+        let nova_escola = {
+          id: qtde_itens,
+          nome: this.nome,
+          diretor: this.diretor,
+          localizacao: this.localizacao,
+          turnos: this.turnos,
+        };
 
-      let nova_escola = {
-        id: qtde_itens,
-        nome: this.nome,
-        diretor: this.diretor,
-        localizacao: this.localizacao,
-        turnos: this.turnos
-      };
+        this.tabela.dados.push(nova_escola);
 
-      this.tabela.dados.push(nova_escola);
-
-      this.nome = "";
-      this.diretor = "";
-      this.localizacao = "";
-      this.turnos = [];
+        this.nome = "";
+        this.diretor = "";
+        this.localizacao = "";
+        this.turnos = [];
+        this.erros = [];
+      }
     },
   },
 };
