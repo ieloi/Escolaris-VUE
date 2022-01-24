@@ -12,6 +12,7 @@ import Maps from 'src/pages/Maps.vue'
 import Notifications from 'src/pages/Notifications.vue'
 import Upgrade from 'src/pages/Upgrade.vue'
 
+import ListagemEscolas from '../components/ListagemEscolas/ListagemEscolas.vue';
 import CadastroEscolas from '../components/CadastroEscolas/CadastroEscolas.vue';
 
 const routes = [
@@ -59,6 +60,11 @@ const routes = [
         path: 'notifications',
         name: 'Notifications',
         component: Notifications
+      },
+      {
+        path: 'listagem-escolas',
+        name: 'Listagem Escolas',
+        component: ListagemEscolas
       },
       {
         path: 'cadastro-escolas',

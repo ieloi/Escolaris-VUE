@@ -22,19 +22,19 @@
         <i class="nc-icon nc-atom"></i>
         <p>Icons</p>
       </sidebar-link>
-      <sidebar-link to="/admin/maps">
-        <i class="nc-icon nc-pin-3"></i>
-        <p>Maps</p>
-      </sidebar-link>
       <sidebar-link to="/admin/notifications">
         <i class="nc-icon nc-bell-55"></i>
         <p>Notifications</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/listagem-escolas">
+        <i class="nc-icon nc-backpack"></i>
+        <p>Listagem Escolas</p>
       </sidebar-link>
       <sidebar-link to="/admin/cadastro-escolas">
         <i class="nc-icon nc-notes"></i>
         <p>Cadastro Escolas</p>
       </sidebar-link>
-
+      
       <template slot="bottom-links">
         <sidebar-link class="active"
                       to="/admin/upgrade">
