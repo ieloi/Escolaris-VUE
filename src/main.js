@@ -34,11 +34,33 @@ const router = new VueRouter({
   linkActiveClass: 'nav-item active',
   scrollBehavior: (to) => {
     if (to.hash) {
-      return {selector: to.hash}
+      return { selector: to.hash }
     } else {
       return { x: 0, y: 0 }
     }
   }
+})
+
+function buscarCredenciais() {
+  let credenciais = window.sessionStorage.getItem("credenciais-usuario");
+
+  return credenciais;
+}
+
+
+router.beforeEach((to, from, next) => {
+
+  //verificar sempre se o token de sessão está preenchido caso bata com alguma das rotas, se estiver, permitir o acesso, senão redirecionar para o login
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (buscarCredenciais() != null) {
+      next();
+    } else {
+      next("/login");
+    }
+  } else {
+    next();
+  }
+
 })
 
 /* eslint-disable no-new */

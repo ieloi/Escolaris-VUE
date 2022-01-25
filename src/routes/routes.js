@@ -14,53 +14,65 @@ import Upgrade from 'src/pages/Upgrade.vue'
 
 import ListagemEscolas from '../components/ListagemEscolas/ListagemEscolas.vue';
 import CadastroEscolas from '../components/CadastroEscolas/CadastroEscolas.vue';
+import Login from '../components/Login/Login.vue';
 
 const routes = [
   {
     path: '/',
     component: DashboardLayout,
-    redirect: '/admin/overview'
+    redirect: '/admin/overview',
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/admin',
     component: DashboardLayout,
     redirect: '/admin/overview',
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: 'overview',
         name: 'Overview',
         component: Overview
       },
-      {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
-      },
-      {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
-      },
+      // {
+      //   path: 'user',
+      //   name: 'User',
+      //   component: UserProfile
+      // },
+      // {
+      //   path: 'table-list',
+      //   name: 'Table List',
+      //   component: TableList
+      // },
+      // {
+      //   path: 'typography',
+      //   name: 'Typography',
+      //   component: Typography
+      // },
+      // {
+      //   path: 'icons',
+      //   name: 'Icons',
+      //   component: Icons
+      // },
+      // {
+      //   path: 'maps',
+      //   name: 'Maps',
+      //   component: Maps
+      // },
+      // {
+      //   path: 'notifications',
+      //   name: 'Notifications',
+      //   component: Notifications
+      // },
       {
         path: 'listagem-escolas',
         name: 'Listagem Escolas',
@@ -71,11 +83,11 @@ const routes = [
         name: 'Cadastro Escolas',
         component: CadastroEscolas
       },
-      {
-        path: 'upgrade',
-        name: 'Upgrade to PRO',
-        component: Upgrade
-      },
+      // {
+      //   path: 'upgrade',
+      //   name: 'Upgrade to PRO',
+      //   component: Upgrade
+      // },
       
     ]
   },

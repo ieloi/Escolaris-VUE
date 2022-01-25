@@ -14,7 +14,7 @@
                 type="text"
                 class="form-control"
                 id="nomeEscola"
-                v-model.trim="nome"
+                v-model.trim="nova_escola.nome"
                 placeholder="Ex: Escola Lorem Ipsum"
               />
             </div>
@@ -24,7 +24,7 @@
                 type="text"
                 class="form-control"
                 id="nomeDiretor"
-                v-model.trim="diretor"
+                v-model.trim="nova_escola.diretor"
                 placeholder="Ex: Lorenzo Ipsolium"
               />
             </div>
@@ -36,7 +36,7 @@
               <select
                 class="custom-select"
                 id="selectLocalizacao"
-                v-model="localizacao"
+                v-model="nova_escola.localizacao"
               >
                 <option selected value="">Selecione uma Opção:</option>
                 <option value="1">Urbana</option>
@@ -51,7 +51,7 @@
                   type="checkbox"
                   class="custom-control-input"
                   id="turnoManha"
-                  v-model="turnos"
+                  v-model="nova_escola.turnos"
                   value="M"
                 />
                 <label class="custom-control-label pt-1" for="turnoManha"
@@ -63,7 +63,7 @@
                   type="checkbox"
                   class="custom-control-input"
                   id="turnoTarde"
-                  v-model="turnos"
+                  v-model="nova_escola.turnos"
                   value="T"
                 />
                 <label class="custom-control-label pt-1" for="turnoTarde"
@@ -75,7 +75,7 @@
                   type="checkbox"
                   class="custom-control-input"
                   id="turnoNoite"
-                  v-model="turnos"
+                  v-model="nova_escola.turnos"
                   value="N"
                 />
                 <label class="custom-control-label pt-1" for="turnoNoite"
@@ -87,7 +87,7 @@
                   type="checkbox"
                   class="custom-control-input"
                   id="turnoIntegral"
-                  v-model="turnos"
+                  v-model="nova_escola.turnos"
                   value="I"
                 />
                 <label class="custom-control-label pt-1" for="turnoIntegral"
@@ -146,13 +146,16 @@ export default {
   name: "cadastro-escolas",
   data() {
     return {
-      nome: "",
-      diretor: "",
-      localizacao: "",
-      turnos: [],
+      nova_escola: {
+        nome: "",
+        diretor: "",
+        localizacao: "",
+        turnos: [],
+      },
 
       //erros encontrados nas validações
       msg_erro: null,
+      erro: [],
 
       //spinner
       spinner: false,
@@ -222,25 +225,18 @@ export default {
 
       setTimeout(() => {
         if (
-          this.nome == "" ||
-          this.localizacao == "" ||
-          this.turnos.length == 0
+          this.nova_escola.nome == "" ||
+          this.nova_escola.localizacao == "" ||
+          this.nova_escola.turnos.length == 0
         ) {
-          this.msg_erro =
-            "Todos os campos (com exceção do nome do diretor) devem ser preenchidos";
+          this.msg_erro = "Todos os campos (com exceção do nome do diretor) devem ser preenchidos";
           this.spinner = false;
         } else {
           let qtde_itens = this.tabela.dados.length + 1;
 
-          let nova_escola = {
-            id: qtde_itens,
-            nome: this.nome,
-            diretor: this.diretor,
-            localizacao: this.localizacao,
-            turnos: this.turnos,
-          };
+          this.nova_escola = { ...this.nova_escola, id : qtde_itens }
 
-          this.tabela.dados.push(nova_escola);
+          this.tabela.dados.push(this.nova_escola);
 
           this.notifyVue("success", "Escola cadastrada com sucesso");
 
