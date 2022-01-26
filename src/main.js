@@ -43,13 +43,10 @@ const router = new VueRouter({
 
 function buscarCredenciais() {
   let credenciais = window.sessionStorage.getItem("credenciais-usuario");
-
   return credenciais;
 }
 
-
 router.beforeEach((to, from, next) => {
-
   //verificar sempre se o token de sessão está preenchido caso bata com alguma das rotas, se estiver, permitir o acesso, senão redirecionar para o login
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (buscarCredenciais() != null) {
@@ -57,6 +54,8 @@ router.beforeEach((to, from, next) => {
     } else {
       next("/login");
     }
+  } else if ((to.matched.some((record) => record.meta.requiresAuth) == false) && (buscarCredenciais() != null)) {
+    next("/");
   } else {
     next();
   }
