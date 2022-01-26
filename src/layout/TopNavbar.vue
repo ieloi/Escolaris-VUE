@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <p class="navbar-brand">Dashboard</p>
+      <p class="navbar-brand">{{ routeName }}</p>
       <button type="button"
               class="navbar-toggler navbar-toggler-right"
               :class="{toggled: $sidebar.showSidebar}"
@@ -41,11 +41,14 @@
     data () {
       return {
         activeNotifications: false,
-        usuario_logado: ""
+        usuario_logado: "",
+        nome_componente: ""
       }
     },
     mounted: function () {
-      this.usuario_logado = JSON.parse(window.sessionStorage.getItem("credenciais-usuario"))
+      this.usuario_logado = JSON.parse(window.sessionStorage.getItem("credenciais-usuario"));
+      this.nome_componente = this.$route.name;
+      console.log(this.nome_componente);
     },
     methods: {
       capitalizeFirstLetter (string) {
@@ -67,7 +70,7 @@
         window.sessionStorage.removeItem("credenciais-usuario");
         this.$router.push({path: '/login'});
       }
-    }
+    },
   }
 
 </script>
